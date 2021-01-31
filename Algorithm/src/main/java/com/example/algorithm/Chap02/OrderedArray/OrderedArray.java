@@ -117,61 +117,58 @@ class OrdArray
 
          for (int x=0; x<arr1.nElems+arr2.nElems; x++) {
 
-               if (arr1Elements == 0) {
-                  for (int y=indexArr2; y<arr2.nElems; y++) {
-                     this.insert(arr2.a[y]);
-                     arr2Elements--;
-                  }
-
-               }
-               if (arr2Elements == 0) {
-                  for (int y=indexArr1; y<arr1.nElems; y++) {
-                     this.insert(arr1.a[y]);
-                     arr1Elements--;
-                  }
+            // Allow to continue merging by different quantity of elements in Arrays.
+            if (arr1Elements == 0) {
+               for (int y=indexArr2; y<arr2.nElems; y++) {
+                  this.insert(arr2.a[y]);
+                  arr2Elements--;
+                  x++;
                }
 
-            if(indexArr1 == indexArr2) {
+            }
+            if (arr2Elements == 0) {
+               for (int y=indexArr1; y<arr1.nElems; y++) {
+                  this.insert(arr1.a[y]);
+                  arr1Elements--;
+                  x++;
+               }
+            }
+
+            if(indexArr1 == indexArr2) {  // equality index
                if (arr1.a[indexArr1] < arr2.a[indexArr2]) {
                   this.insert(arr1.a[indexArr1]);
                   arr1Elements--;
-
                   tempValArr2 = arr2.a[indexArr2];
                   indexArr1++;
                } else {
                   this.insert(arr2.a[indexArr2]);
                   arr2Elements--;
-
                   tempValArr1 = arr1.a[indexArr1];
                   indexArr2++;
                }
-            } else if(indexArr1 > indexArr2) {
+            } else if(indexArr1 > indexArr2 && arr1Elements>0) { // Index Arr1 > Index Arr2
                if (arr1.a[indexArr1] < tempValArr2) {
                   this.insert(arr1.a[indexArr1]);
                   arr1Elements--;
-
                   indexArr1++;
                } else {
                   this.insert(tempValArr2);
                   arr2Elements--;
-
                   indexArr2++;
                   tempValArr2 = arr2.a[indexArr2];
                }
-            } else {
-                  if (arr2.a[indexArr2] < tempValArr1) {
-                     this.insert(arr2.a[indexArr2]);
-                     arr2Elements--;
-
-                     indexArr2++;
-                  } else {
-                     this.insert(tempValArr1);
-                     arr1Elements--;
-
-                     indexArr1++;
-                     tempValArr1 = arr1.a[indexArr1];
-                  }
+            } else if (indexArr1 < indexArr2 && arr2Elements>0) { // Index Arr1 < Index Arr2
+               if (arr2.a[indexArr2] < tempValArr1) {
+                  this.insert(arr2.a[indexArr2]);
+                  arr2Elements--;
+                  indexArr2++;
+               } else {
+                  this.insert(tempValArr1);
+                  arr1Elements--;
+                  indexArr1++;
+                  tempValArr1 = arr1.a[indexArr1];
                }
+            }
          }
          this.display();
       }
