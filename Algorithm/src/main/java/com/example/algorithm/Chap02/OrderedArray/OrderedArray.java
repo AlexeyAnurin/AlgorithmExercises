@@ -1,45 +1,16 @@
 package com.example.algorithm.Chap02.OrderedArray;
 
-// OrderedArray.java
-// demonstrates ordered array class
-// to run this program: C>java OrderedApp
-////////////////////////////////////////////////////////////////
 class OrdArray
    {
    private long[] a;                 // ref to array a
    private int nElems;               // number of data items
-   //-----------------------------------------------------------
+
    public OrdArray(int max)          // constructor
       {
       a = new long[max];             // create array
       nElems = 0;
       }
-   //-----------------------------------------------------------
-   public int size()
-      { return nElems; }
-   //-----------------------------------------------------------
-   public int find(long searchKey) {
-      int lowerBound = 0;
-      int upperBound = nElems-1;
-      int currentIndex;
 
-      while(true)
-         {
-         currentIndex = (lowerBound + upperBound ) / 2;
-         if(a[currentIndex]==searchKey)
-            return currentIndex;              // found it
-         else if(lowerBound > upperBound)
-            return nElems;             // can't find it
-         else                          // divide range
-            {
-            if(a[currentIndex] < searchKey)
-               lowerBound = currentIndex + 1; // it's in upper half
-            else
-               upperBound = currentIndex - 1; // it's in lower half
-            }  // end else divide range
-         }  // end while
-      }  // end find()
-   //-----------------------------------------------------------
    public void insert(long value)    // put element into array
       {
 
@@ -52,57 +23,16 @@ class OrdArray
          a[k] = a[k-1];
       a[j] = value;                  // insert it
       nElems++;                      // increment size
-      }  // end insert()
+      }
 
-     /* //! 2.4 РАСКОММЕНТИРУЙ! Это ДВОИЧНЫЙ ПОИСК
-      public void insert(int value) {
-         int lowerBound = 0;
-         int upperBound = nElems - 1;
-         int j = 0;
-
-         while(true) {
-
-            if(lowerBound > upperBound) break;
-            j = (lowerBound + upperBound) / 2;
-
-            if(value > a[j]) {
-               lowerBound = j + 1;
-               j++;
-            }
-            else upperBound = j - 1;
-         }
-
-         for(int k=nElems; k>j; k--)
-            a[k] = a[k-1];
-
-         a[j] = value;
-         nElems++;
-      }*/
-
-      //-----------------------------------------------------------
-   public boolean delete(long value)
-      {
-      int j = find(value);
-      if(j==nElems)                  // can't find it
-         return false;
-      else                           // found it
-         {
-         for(int k=j; k<nElems; k++) // move bigger ones down
-            a[k] = a[k+1];
-         nElems--;                   // decrement size
-         return true;
-         }
-      }  // end delete()
-   //-----------------------------------------------------------
    public void display()             // displays array contents
       {
       for(int j=0; j<nElems; j++)       // for each element,
          System.out.print(a[j] + " ");  // display it
       System.out.println("");
       }
-   //-----------------------------------------------------------
 
-      // 4.5
+      // 4.5 merging of two arranged arrays
       public void merge(OrdArray arr1, OrdArray arr2) {
 
          int indexArr1=0;
@@ -114,7 +44,6 @@ class OrdArray
          int arr1Elements = arr1.nElems;
          int arr2Elements = arr2.nElems;
 
-
          for (int x=0; x<arr1.nElems+arr2.nElems; x++) {
 
             // Allow to continue merging by different quantity of elements in Arrays.
@@ -124,7 +53,6 @@ class OrdArray
                   arr2Elements--;
                   x++;
                }
-
             }
             if (arr2Elements == 0) {
                for (int y=indexArr1; y<arr1.nElems; y++) {
@@ -172,7 +100,7 @@ class OrdArray
          }
          this.display();
       }
-   }  // end class OrdArray
+   }
 
 ////////////////////////////////////////////////////////////////
 class OrderedApp
@@ -180,28 +108,15 @@ class OrderedApp
    public static void main(String[] args)
       {
       int maxSize = 100;             // array size
-      OrdArray arr;                  // reference to array
       OrdArray arr1;                  // reference to array
-      OrdArray arr2;                  // reference to array
-      OrdArray sumArr;                  // reference to array
-      arr = new OrdArray(maxSize);   // create the array
+      OrdArray arr2;
+      OrdArray sumArr;
 
       arr1 = new OrdArray(maxSize);   // create the array
-      arr2 = new OrdArray(maxSize);   // create the array
-      sumArr = new OrdArray(maxSize);   // create the array
+      arr2 = new OrdArray(maxSize);
+      sumArr = new OrdArray(maxSize);
 
-      arr.insert(77);                // insert 10 items
-      arr.insert(99);
-      arr.insert(44);
-      arr.insert(55);
-      arr.insert(22);
-      arr.insert(88);
-      arr.insert(11);
-      arr.insert(00);
-      arr.insert(66);
-      arr.insert(33);
-
-      // merge
+      // 2.6 create arrays for merge
          arr1.insert(21);
          arr1.insert(23);
          arr1.insert(45);
@@ -217,23 +132,8 @@ class OrderedApp
          arr2.insert(447);
          arr2.insert(448);
          arr2.insert(449);
+         // merging of arrays
+         sumArr.merge(arr1, arr2); //  21 22 23 44 45 100 101 300 301 441 445 447 448 449
 
-
-
-         sumArr.merge(arr1, arr2);
-
-      int searchKey = 55;            // search for item
-      if( arr.find(searchKey) != arr.size() )
-         System.out.println("Found " + searchKey);
-      else
-         System.out.println("Can't find " + searchKey);
-
-      arr.display();                 // display items
-
-      arr.delete(00);                // delete 3 items
-      arr.delete(55);
-      arr.delete(99);
-
-      arr.display();                 // display items again
-      }  // end main()
-   }  // end class OrderedApp
+      }
+   }
