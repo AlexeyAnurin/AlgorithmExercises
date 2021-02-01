@@ -1,9 +1,5 @@
 package com.example.algorithm.Chap02.OrderedArray;
 
-// OrderedArray.java
-// demonstrates ordered array class
-// to run this program: C>java OrderedApp
-////////////////////////////////////////////////////////////////
 class OrdArrayBinary
    {
    private long[] a;                 // ref to array a
@@ -18,6 +14,7 @@ class OrdArrayBinary
    public int size()
       { return nElems; }
    //-----------------------------------------------------------
+   //  2.4 Binary search
    public int find(long searchKey) {
       int lowerBound = 0;
       int upperBound = nElems-1;
@@ -36,13 +33,12 @@ class OrdArrayBinary
                lowerBound = currentIndex + 1; // it's in upper half
             else
                upperBound = currentIndex - 1; // it's in lower half
-            }  // end else divide range
-         }  // end while
-      }  // end find()
+            }
+         }
+      }
    //-----------------------------------------------------------
- 
 
-      //! 2.4 Это ДВОИЧНЫЙ ПОИСК
+      //  2.4 Binary insert
       public void insertBinary(int value) {
          int lowerBound = 0;
          int upperBound = nElems - 1;
@@ -67,7 +63,7 @@ class OrdArrayBinary
          nElems++;
       }
 
-      //-----------------------------------------------------------
+      //  2.4 Binary delete
    public boolean delete(long value)
       {
       int j = find(value);
@@ -80,7 +76,7 @@ class OrdArrayBinary
          nElems--;                   // decrement size
          return true;
          }
-      }  // end delete()
+      }
    //-----------------------------------------------------------
    public void display()             // displays array contents
       {
@@ -88,10 +84,7 @@ class OrdArrayBinary
          System.out.print(a[j] + " ");  // display it
       System.out.println("");
       }
-   //-----------------------------------------------------------
-
-      
-   }  // end class OrdArray
+   }
 
 ////////////////////////////////////////////////////////////////
 class OrderedAppBinary
@@ -102,8 +95,7 @@ class OrderedAppBinary
       OrdArrayBinary arr;                  // reference to array
       arr = new OrdArrayBinary(maxSize);   // create the array
 
-
-      arr.insertBinary(77);                // insert 10 items
+      arr.insertBinary(77);
       arr.insertBinary(99);
       arr.insertBinary(44);
       arr.insertBinary(55);
@@ -126,6 +118,6 @@ class OrderedAppBinary
       arr.delete(55);
       arr.delete(99);
 
-      arr.display();                 // display items again
-      }  // end main()
-   }  // end class OrderedApp
+      arr.display();
+      }
+   }
