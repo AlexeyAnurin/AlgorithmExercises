@@ -1,4 +1,4 @@
-package com.example.algorithm.Chap02.HighArray.InsertSort;
+package com.example.algorithm.Chap03.InsertSort;
 
 
 class ArrayIns {
