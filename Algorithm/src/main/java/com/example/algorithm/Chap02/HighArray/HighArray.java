@@ -79,6 +79,46 @@ class HighArray
       System.out.println("");
       }
    //-----------------------------------------------------------
+
+      // 2.6
+      public int findFirstEncounter(long searchKey) {   // find specified value
+         int j;
+         for(j=0; j<nElems; j++) {          // for each element,
+            if (myArray[j] == searchKey) {
+               return j+1;
+            }
+         }
+        // if (j == nElems)
+            return 0;
+      }
+
+
+      // 2.6
+      public boolean deleteDuplicates(long searchKey,int startIndex) {                              // find specified value
+         int j;
+         for(j=startIndex; j<nElems; j++){            // for each element,
+            if(myArray[j] == searchKey)           // found item?
+            delete(myArray[j]);
+         }
+
+         if(j == nElems)                    // gone to end?
+            return false;                   // yes, can't find it
+         else
+            return true;                    // no, found it
+      }  // end deleteDuplicates()
+
+      // 2.6
+      public void noDups(){
+         int j;
+         for (j = 0; j<nElems; j++) {
+            int fistEncounterIndex = this.findFirstEncounter(this.myArray[j]);
+            if (fistEncounterIndex != 0) {
+               deleteDuplicates(this.myArray[j], fistEncounterIndex);
+            }
+            this.display();
+         }
+      }
+
    }  // end class HighArray
 
 ////////////////////////////////////////////////////////////////
@@ -90,20 +130,22 @@ class HighArrayApp
       HighArray arr;                // reference to array
       arr = new HighArray(maxSize); // create the array
 
-      arr.insert(77);               // insert 10 items
-      arr.insert(99);
-      arr.insert(44);
+      arr.insert(11);
+      arr.insert(22);
+      arr.insert(55);
+      arr.insert(33);
+      arr.insert(55);
+      arr.insert(55);
+      arr.insert(11);
       arr.insert(55);
       arr.insert(22);
-      arr.insert(88);
-      arr.insert(11);
-      arr.insert(00);
-      arr.insert(66);
+      arr.insert(44);
       arr.insert(33);
+
 
       arr.display();                // display items
 //////////////////////
-         // 2.1
+ /*        // 2.1
            System.out.println("Max: " + arr.getMax());
 
          // 2.2
@@ -118,8 +160,6 @@ class HighArrayApp
             choiseSortArray.display();
          }
 
-
-
 //////////////////
 
       int searchKey = 35;           // search for item
@@ -132,6 +172,10 @@ class HighArrayApp
       arr.delete(55);
       arr.delete(99);
 
-      arr.display();                // display items again
+      arr.display();                // display items again*/
+
+         // 2.6
+         arr.noDups();
+
       }  // end main()
    }  // end class HighArrayApp

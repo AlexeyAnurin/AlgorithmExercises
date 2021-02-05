@@ -18,8 +18,7 @@ class HighArrayNoDups
       nElems++;                      // increment size
       }
    //-----------------------------------------------------------
-   public boolean delete(long value)
-      {
+   public boolean delete(long value) {
       int j;
       for(j=0; j<nElems; j++)        // look for it
          if( value == myArray[j] )

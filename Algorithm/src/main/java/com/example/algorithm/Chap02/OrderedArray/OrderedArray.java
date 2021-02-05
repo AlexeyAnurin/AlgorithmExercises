@@ -116,7 +116,7 @@ class OrderedApp
       arr2 = new OrdArray(maxSize);
       sumArr = new OrdArray(maxSize);
 
-      // 2.6 create arrays for merge
+      // 2.5 create arrays for merge
          arr1.insert(21);
          arr1.insert(23);
          arr1.insert(45);
